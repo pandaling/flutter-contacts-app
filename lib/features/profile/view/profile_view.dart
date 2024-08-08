@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts_app/features/access/controllers/access_controller.dart';
 import 'package:flutter_contacts_app/features/contact/models/contact_model.dart';
+import 'package:flutter_contacts_app/features/contact/view/contact_details_view.dart';
 import 'package:flutter_contacts_app/features/splash/view/splash_view.dart';
 import 'package:flutter_contacts_app/styles/app_style.dart';
 import 'package:flutter_contacts_app/widgets/avatar/custom_circle_avatar.dart';
@@ -15,7 +16,16 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  _update() {}
+  _update(Contact? contact) {
+    if (contact == null) {
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => ContactDetailsView(contact: contact)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +80,7 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             const SizedBox(height: 12.0),
             RoundedRectangleButton(
-              onPressed: () => _update(),
+              onPressed: () => _update(contact),
               label: 'Update my detail',
             ),
           ],
